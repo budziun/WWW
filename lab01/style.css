@@ -43,7 +43,7 @@ a{
     text-decoration: none;
     color:black;
 }
-#submit1{
+.submit1{
     background-color:aqua;
     text-align: center;
     width: 150px;
@@ -55,4 +55,12 @@ hr{
     background-color: black;
     height: 1px;
     border:0px;
+}
+.table1 td a:hover {
+    color: white;
+    background-color: darkblue;
+}
+ul ol li{
+    text-align: center;
+    margin-left: auto;
 }
