@@ -25,5 +25,5 @@ function clear(form){
     decimal = 0;
 }
 function changeBackground(hexnumber){
-    document.bgColor = hexnumber;
+    document.body.style.backgroundColor = hexnumber;
 }
