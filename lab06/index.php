@@ -1,4 +1,4 @@
-
+<!-- Wersja 1.5 --> 
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -45,11 +45,13 @@
     } else {
         echo $tresc_strony;
     }
-
+    echo '<hr>';
+    echo '<footer>';
     $nr_indeksu ='169224';
     $nrGrupy = '1';
 
     echo 'Jakub Budzich '. $nr_indeksu.' grupa '. $nrGrupy.' <br /><br />';
+    echo '</footer>';
     ?>
 
 </body>
