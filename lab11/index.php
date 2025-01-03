@@ -45,11 +45,9 @@
 
     // Przełącznik stron w zależności od idp
     if ($idp == 8) {
-        echo "<h1>Kontakt</h1>";
         echo WyslijMailKontakt("169224@student.uwm.edu.pl");
         echo "<br><br>";
     } elseif ($idp == 9) {
-        echo "<h1>Odzyskanie hasła</h1>";
         echo PrzypomnijHaslo("169224@student.uwm.edu.pl");
         echo "<br><br>";
     } else {

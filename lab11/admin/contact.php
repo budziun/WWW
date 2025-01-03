@@ -72,20 +72,27 @@ function PrzypomnijHaslo($odbiorca) {
  */
 function PokazKontakt() {
     return '
-    <div class="main">
-        <div class="form_email">
+        <div class="login-box">
+        <h1 class="heading">Wyślij wiadomość</h1>
             <form method="post" enctype="multipart/form-data" action="' . htmlspecialchars($_SERVER['REQUEST_URI']) . '">
-                <table class="form_email">
-                    <tr><td class="log4_t">Email: </td><td><input type="email" name="email" class="form_email" required /></td></tr>
-                    <tr><td class="log4_t">Tytuł: </td><td><input type="text" name="title" class="form_email" required /></td></tr>
-                    <tr><td class="log4_t">Zawartość: </td><td><textarea name="content" class="form_email" required></textarea></td></tr>
-                    <tr><td></td><td><input type="submit" name="x1_submit" class="form_email" value="Wyślij" /></td></tr>
-                </table>
+                <div class="user-box">
+                    <input type="email"  name="email" class="form_email" required />
+                    <label>Email</label>
+                </div>
+                <div class="user-box">
+                    <input type="text" name="title" class="form_email" required />
+                    <label>Tytuł</label>
+                </div>
+                <div class="user-box">
+                    <textarea name="content" class="big_one" required></textarea>
+                    <label>Zawartość wiadomości</label>
+                </div>
+                <div>
+                    <input type="submit" name="x1_submit" value="Wyślij" class="logowanie1"/>
+                </div>
             </form>
-        </div>
-    </div>';
+        </div>';
 }
-
 /**
  * Funkcja generująca formularz odzyskiwania hasła.
  *
@@ -93,15 +100,18 @@ function PokazKontakt() {
  */
 function PokazKontaktHaslo() {
     return '
-    <div class="main">
-        <div class="form_passrecov">
+        <div class="login-box">
+        <h1 class="heading">Odzyskaj hasło</h1>
             <form method="post" enctype="multipart/form-data" action="' . htmlspecialchars($_SERVER['REQUEST_URI']) . '">
-                <table class="form_passrecov">
-                    <tr><td class="log4_t">Email: </td><td><input type="email" name="email_recov" class="form_passrecov" required /></td></tr>
-                    <tr><td></td><td><input type="submit" name="x1_submit" class="form_passrecov" value="Odzyskaj" /></td></tr>
-                </table>
+                <div class="user-box">
+                    <input type="email" autocomplete="off" id="email_recov" name="email_recov" required />
+                    <label>Email</label>
+                </div>
+                <div>
+                    <input type="submit" name="x1_submit" value="Odzyskaj" class="logowanie1" />
+                </div>
             </form>
-        </div>
-    </div>';
+        </div>';
 }
+
 ?>

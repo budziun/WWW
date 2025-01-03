@@ -15,13 +15,19 @@ require('cfg.php');
 echo "<div class='main'>";
 function FormularzLogowania() {
     $wynik = '
-    <div class="login-wrapper">
-    <h1 class="heading">LOGOWANIE </h1>
-    <a href="../index.php" > Strona główna </a><br><br>
+    <div class="login-box">
+    <h1 class="heading">Zaloguj się</h1>
+    <a id="go_home" href="../index.php" > Strona główna </a><br><br>
     <form class="formularz_logowania" method="POST" name="LoginForm" enctype="multipart/form-data" action="'.$_SERVER['REQUEST_URI'].'"
-    <table class="logowanie">
-    <tr><td class="log4_t">login</td><td><input type="text" name="login_email" class="logowanie"/></td></tr>
-    <tr><td class="log4_t">haslo</td><td><input type="password" name="login_pass" class="logowanie"/></td></tr>
+    <table>
+    <div class="user-box">
+        <input type="text" autocomplete="off" name="login_email" required />
+        <label>Login</label>
+      </div>
+    <div class="user-box">
+        <input type="password" name="login_pass" required/>
+        <label>Hasło</label>
+      </div>
     <tr><td><br/></td><td><input type="submit" name="xl_submit" class="logowanie1" value="Zaloguj"/></td></tr>
     </table>
     </form>
@@ -34,9 +40,7 @@ function FormularzLogowania() {
 function ListaPodstron() {
     global $conn;
 
-    $wynik = '<h3>Podstrony:</h3>'.'<table class="tabela_akcji">'.'<tr><th>ID</th><th>Tytuł podstrony</th><th>Akcje</th></tr>';
-    $wynik .= '<a href="'.$_SERVER['PHP_SELF'].'?action=dodaj">Dodaj podstronę</a> <br /> <br />';
-
+    $wynik = '<h3>Podstrony</h3>'.'<table class="tabela_akcji">'.'<tr><th>ID</th><th>Tytuł podstrony</th><th>Akcje</th></tr>';
     $query = "SELECT id, page_title FROM page_list";
     $result = mysqli_query($conn, $query);
 
@@ -45,14 +49,14 @@ function ListaPodstron() {
             $id = $row['id'];
             $page_title = $row['page_title'];
 
-            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $page_title . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action=edytuj&id='.$id.'">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action=usun&id='.$id.'">Usuń</a></td>'.'</tr>';
+            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $page_title . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action=edytuj&id='.$id.'">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action=usun&id='.$id.'" class="a_del">Usuń</a></td>'.'</tr>';
         }
     } else {
         $wynik .= '<tr><td colspan="3">Brak podstron do wyświetlenia.</td></tr>';
     }
 
     $wynik .= '</table>';
-
+    $wynik .= '<br><br><a href="'.$_SERVER['PHP_SELF'].'?action=dodaj" class="shine">Dodaj podstronę</a> <br /> <br />';
     echo $wynik;
 
     if (isset($_GET['action'])) {
@@ -110,8 +114,8 @@ function DodajNowaPodstrone() {
  function ListaKategorii() {
     global $conn;
 
-    $wynik = '<h3>Kategorie:</h3>'.'<table class="tabela_akcji">'.'<tr><th>ID</th><th>Nazwa kategorii</th><th>Matka</th><th>Akcje</th></tr>';
-    $wynik .= '<a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=dodaj">Dodaj kategorię</a> <br /> <br />';
+    $wynik = '<h3>Kategorie</h3>'.'<table class="tabela_akcji">'.'<tr><th>ID</th><th>Nazwa kategorii</th><th>Matka</th><th>Akcje</th></tr>';
+    
     $query = "SELECT c.id, c.nazwa, IFNULL(m.nazwa, 'Brak') AS matka_nazwa 
               FROM categories c 
               LEFT JOIN categories m ON c.matka = m.id";
@@ -124,14 +128,14 @@ function DodajNowaPodstrone() {
             $nazwa = $row['nazwa'];
             $matka = $row['matka_nazwa']; 
 
-            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $nazwa . '</td>'.'<td>' . $matka . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=edytuj&id='.$id.'">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=usun&id='.$id.'">Usuń</a></td>'.'</tr>';
+            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $nazwa . '</td>'.'<td>' . $matka . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=edytuj&id='.$id.'">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=usun&id='.$id.'" class="a_del">Usuń</a></td>'.'</tr>';
         }
     } else {
         $wynik .= '<tr><td colspan="4">Brak kategorii do wyświetlenia.</td></tr>';
     }
 
     $wynik .= '</table>';
-
+    $wynik .= '<br><br><a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=dodaj" class="shine">Dodaj kategorię</a> <br /> <br />';
     echo $wynik;
 
     if (isset($_GET['action_kategoria'])) {
@@ -259,8 +263,8 @@ if (isset($_POST['login_email']) && isset($_POST['login_pass'])) {
         $_SESSION['admin_logged_in'] = true;
         header("Refresh:0");
     } else {
-        echo 'Wpisz hasło lub login jeszcze raz';
-        echo FormularzLogowania();
+        echo '<a class="error">Błędne Dane! <br>Wpisz hasło lub login jeszcze raz</a>';
+        echo '<br><br>';
     }
 }
 
@@ -284,9 +288,8 @@ function PobierzKategorieOpcje($selected_id = null) {
 function ListaProduktow() {
     global $conn;
 
-    $wynik = '<h3>Produkty:</h3>';
+    $wynik = '<h3>Produkty</h3>';
     $wynik .= '<table class="tabela_akcji"><tr><th>ID</th><th>Nazwa</th><th>Kategoria</th><th>Cena netto</th><th>Podatek VAT</th><th>Cena brutto</th><th>Status dostępności</th><th>Gabaryt</th><th>Ilość</th><th>Data utworzenia</th><th>Data modyfikacji</th><th>Data wygaśnięcia</th><th>Akcje</th></tr>';
-    $wynik .= '<a href="'.$_SERVER['PHP_SELF'].'?action_produkt=dodaj">Dodaj produkt</a><br /><br />';
 
     $query = "SELECT p.id, p.tytul AS title, c.nazwa AS category, p.cena_netto AS price, p.podatek_vat AS vat, p.status_dostepnosci, 
                      p.gabaryt, p.ilosc, p.data_utworzenia, p.data_modyfikacji, p.data_wygasniecia
@@ -317,7 +320,7 @@ function ListaProduktow() {
             $wynik .= '<td>'.$data_wygasniecia.'</td>';
             $wynik .= '<td>
                         <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=edytuj&id='.$row['id'].'">Edytuj</a> |
-                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=usun&id='.$row['id'].'">Usuń</a>
+                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=usun&id='.$row['id'].'" class="a_del">Usuń</a>
                        </td>';
             $wynik .= '</tr>';
         }
@@ -326,6 +329,7 @@ function ListaProduktow() {
     }
 
     $wynik .= '</table>';
+    $wynik .= '<br><br><a href="'.$_SERVER['PHP_SELF'].'?action_produkt=dodaj" class="shine">Dodaj produkt</a><br /><br />';
     return $wynik;
 }
 function DodajProdukt() {

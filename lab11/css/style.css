@@ -1,5 +1,6 @@
 body{
     background-color: lightblue;
+    font-family: sans-serif;
 }
 h1{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -69,19 +70,15 @@ a{
     border: 0;
     font-size: 14px;
 }
-hr{
-    background-color: black;
-    height: 1px;
-    border:0px;
-}
 .table1 td a:hover {
     color: white;
     background-color: darkblue;
 }
 ul ol li{
     text-align: center;
-    margin-left: auto;
+    list-style-position: inside;
 }
+/* divy od skryptu js data */
 #zegarek{
     font-size: 74px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -97,11 +94,16 @@ ul ol li{
 .table2{
     text-align: center;
 }
+/* stopka */
 footer{
     text-align: center;
 }
+hr{
+    background-color: black;
+    height: 1px;
+    border:0px;
+}
 .test-block{
-
     width: 220px;
     border: 1.5px solid rgb(100, 181, 208);
     background: rgb(100, 202, 236);
@@ -121,63 +123,20 @@ footer{
     padding: 10px;
     text-align: center;
 }
-.logowanie{
-    margin-left: auto;
-    margin-right: auto;
+.main_list{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+
 }
 .tabela_akcji{
     margin-left: auto;
     margin-right: auto; 
 }
-.login-wrapper {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-.heading {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.logowanie {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 auto;
-}
-
-.logowanie td {
-    padding: 8px;
-    text-align: left;
-    font-size: 14px;
-    color: #333;
-}
-
-.logowanie .log4_t {
-    text-align: right;
-    font-weight: bold;
-    padding-right: 10px;
-}
-
-input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 15px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
 .logowanie1 {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #034ff4;
     color: white;
     font-size: 16px;
     border: none;
@@ -185,16 +144,150 @@ input[type="text"], input[type="password"] {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .logowanie1:hover {
-    background-color: #0056b3;
+    background-color: #020fc2;
 }
 .a_wyloguj{
     color: red;
     font-size: 24px;
     transition: transform 0.3s ease, font-size 0.3s ease;
+    font-weight: bold;
 }
 .a_wyloguj:hover {
     transform: scale(1.4);
     font-size: 32px;
+}
+.login-box{
+    font-family: sans-serif;
+    width: 400px;
+    padding: 40px;
+    
+    background: linear-gradient(#006992, #2E1760);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#go_home, .heading{
+    font-family: sans-serif;
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+}
+.login-box .user-box {
+    position: relative;
+}
+  
+.login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+.login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+}
+.login-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+}
+  
+.login-box a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+}
+login-box a span {
+    position: absolute;
+    display: block;
+  }
+.big_one {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    min-height: 150px;
+    min-width: 100%;
+    max-width: 100%;
+}
+.big_one:focus ~ label,
+.big_one:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+}
+.error{
+    color: red;
+    font-size: 32px;
+}
+.shine{
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 2px;
+}
+.shine:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+}
+.a_del{
+    color: red;
+    font-weight: bold;
+}
+.a_del:hover{
+    background: darkred;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px darkred,
+                0 0 10px darkred,
+                0 0 20px darkred,
+                0 0 30px darkred;
 }
