@@ -15,6 +15,7 @@ require('cfg.php');
 echo "<div class='main'>";
 function FormularzLogowania() {
     $wynik = '
+    <div id="admin">
     <div class="login-box">
     <h1 class="heading">Zaloguj się</h1>
     <a id="go_home" href="../index.php" > Strona główna </a><br><br>
@@ -32,7 +33,7 @@ function FormularzLogowania() {
     </table>
     </form>
     </div>
-    
+    </div>
     ';
     return $wynik;
 }
@@ -467,6 +468,7 @@ function EdytujProdukt() {
 }
 
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+    echo '<div id="logged_admin">';
     echo '<h1>Witamy w panelu administratora</h1>';
     echo '<a href="wylogowanie.php" class="a_wyloguj"> Wyloguj </a>';
     echo ListaPodstron();
@@ -489,6 +491,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     echo FormularzLogowania();
 }
 ob_end_flush();
+echo '</div>';
 ?>
 </div>
 </body>

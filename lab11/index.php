@@ -11,29 +11,31 @@
     <!-- Pliki stylów i skryptów -->
     <link rel="stylesheet" href="css/style.css">
     <script src="js/kolorujtlo.js" type="text/javascript"></script>
+    <script src="js/pasek.js" type="text/javascript"></script>
     <script src="js/timedate.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onload="startclock()">
-    <!-- Nagłówek strony -->
-    <h1>Komputery moją pasją</h1>
-
-    <!-- Menu nawigacyjne -->
-    <table class="table1">
-        <tr>
-            <td><a href="index.php?idp=1"><img src="https://www.svgrepo.com/show/96177/home-button.svg" width="16px" height="16px" alt="home"></a></td>
-            <td><h2><a href="index.php?idp=2"><b><i>Historia Komputerów</i></b></a></h2></td>
-            <td><h2><a href="index.php?idp=3"><b><i>Podstawowe elementy komputera</i></b></a></h2></td>
-            <td><h2><a href="index.php?idp=4"><b><i>Typy komputerów</i></b></a></h2></td>
-            <td><h2><a href="index.php?idp=5"><b><i>Polskie komputery</i></b></a></h2></td>
-            <td><h2><a href="index.php?idp=6"><b><i>Maszyny poprzedzające komputer</i></b></a></h2></td>
-            <td><h2><a href="index.php?idp=7"><b><i>Filmy</i></b></a></h2></td>
-            <td><h2><a href="index.php?idp=8"><b><i>Mail</i></b></a></h2></td>
-            <td><h2><a href="index.php?idp=9"><b><i>Odzyskaj hasło</i></b></a></h2></td>
-        </tr>
-    </table>
-    <br>
-
+    <!-- Menu Nawigacyjne -->
+    <div class="navbar">
+    <!-- Nagłówek -->
+    <div class="title_page"><h1>Komputery moją pasją</h1></div>
+    <!-- Linki menu -->
+    <div class="navbar-links">
+        <a href="index.php?idp=1">Strona główna</a>
+        <a href="index.php?idp=2">Historia Komputerów</a>
+        <a href="index.php?idp=3">Podstawowe elementy</a>
+        <a href="index.php?idp=4">Typy komputerów</a>
+        <a href="index.php?idp=5">Polskie komputery</a>
+        <a href="index.php?idp=6">Maszyny poprzedzające</a>
+        <a href="index.php?idp=7">Filmy</a>
+        <a href="index.php?idp=8">Mail</a>
+        <a href="index.php?idp=9">Odzyskaj hasło</a>
+        <!-- Link do panelu admina -->
+        <a href="admin/admin.php"><b>Admin</b></a>
+    </div>
+</div>
+<div class="progress-bar"></div>
     <?php
     // Załączenie plików konfiguracyjnych
     include('admin/cfg.php');
@@ -65,10 +67,7 @@
     $nr_indeksu = '169224';
     $nrGrupy = '1';
     echo "Jakub Budzich $nr_indeksu grupa $nrGrupy<br><br>";
-    echo '</footer>';
-
-    // Link do panelu admina
-    echo '<a href="admin/admin.php"><b>Admin</b></a>';
+    echo '</footer>';    
     ?>
 </body>
 </html>

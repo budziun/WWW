@@ -25,9 +25,13 @@ function WyslijMailKontakt($odbiorca) {
 
         // Wysłanie e-maila
         if (mail($mail['recipient'], $mail['subject'], $mail['body'], $header)) {
-            echo '[wiadomosc_wyslana]';
+            echo '<div class="login-box">';
+            echo '<p>Mail wysłany!</p>';
+            echo '</div>';
         } else {
-            echo '[blad_wysylania_wiadomosci]';
+            echo '<div class="login-box">';
+            echo '<p>Błąd wysyłania wiadomości</p>';
+            echo '</div>';
         }
     }
 }
@@ -58,9 +62,13 @@ function PrzypomnijHaslo($odbiorca) {
 
         // Wysłanie e-maila
         if (mail($mail['recipient'], $mail['subject'], $mail['body'], $header)) {
-            echo '[haslo_wyslane]';
+            echo '<div class="login-box">';
+            echo '<p>Hasło wysłane!</p>';
+            echo '</div>';
         } else {
-            echo '[blad_wysylania_wiadomosci]';
+            echo '<div class="login-box">';
+            echo '<p>Błąd wysyłania wiadomości</p>';
+            echo '</div>';
         }
     }
 }

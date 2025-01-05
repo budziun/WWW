@@ -1,6 +1,8 @@
 body{
     background-color: lightblue;
     font-family: sans-serif;
+    margin: 0;
+    padding: 0; 
 }
 h1{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -69,6 +71,7 @@ a{
     border-radius: 10px;
     border: 0;
     font-size: 14px;
+    cursor: pointer;
 }
 .table1 td a:hover {
     color: white;
@@ -84,12 +87,14 @@ ul ol li{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     position: relative;
     text-align: center;
+    margin-top: 130px;
 }
 #data{
     font-size: 32px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     position: relative;
     text-align: center;
+    margin-bottom: -100px;
 }
 .table2{
     text-align: center;
@@ -122,11 +127,13 @@ hr{
     width: 50%;
     padding: 10px;
     text-align: center;
+    margin-top: 100px;
 }
 .main_list{
     margin: auto;
     width: 50%;
     padding: 10px;
+    margin-top: 100px;
 
 }
 .tabela_akcji{
@@ -146,6 +153,18 @@ hr{
 }
 .logowanie1:hover {
     background-color: #020fc2;
+    animation: buttonAnimation 0.5s ease-in-out;
+}
+@keyframes buttonAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 .a_wyloguj{
     color: red;
@@ -161,13 +180,13 @@ hr{
     font-family: sans-serif;
     width: 400px;
     padding: 40px;
-    
     background: linear-gradient(#006992, #2E1760);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 150px;
 }
 #go_home, .heading{
     font-family: sans-serif;
@@ -290,4 +309,82 @@ login-box a span {
                 0 0 10px darkred,
                 0 0 20px darkred,
                 0 0 30px darkred;
+}
+/*
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 2px solid #ccc;
+    background: linear-gradient(#006992, #2E1760);
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+}
+*/
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+    background: linear-gradient(#006992, #2E1760);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box; 
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+}
+.title_page {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+.navbar-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+.navbar-links a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+}
+.progress-bar {
+    position: fixed;
+    top: 100px; 
+    left: 0;
+    height: 5px;
+    background-color: #03e9f4;
+    width: 0;
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+}
+#admin{
+    margin-top: -300px;
+}
+#logged_admin{
+    margin-top: -200px;
+}
+.login-box p{
+    color: white;
+    text-align: center;
 }
