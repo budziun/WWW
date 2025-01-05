@@ -50,7 +50,7 @@ function ListaPodstron() {
             $id = $row['id'];
             $page_title = $row['page_title'];
 
-            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $page_title . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action=edytuj&id='.$id.'">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action=usun&id='.$id.'" class="a_del">Usuń</a></td>'.'</tr>';
+            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $page_title . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action=edytuj&id='.$id.'" class="btn-edytuj">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action=usun&id='.$id.'" class="btn-usun">Usuń</a></td>'.'</tr>';
         }
     } else {
         $wynik .= '<tr><td colspan="3">Brak podstron do wyświetlenia.</td></tr>';
@@ -89,12 +89,13 @@ function EdytujPodstrone() {
         $page_title = $row['page_title'];
         $page_content = $row['page_content'];
         $page_is_active = $row['status'];
-
-        $wynik = '<h3>Edycja Podstrony o id:'.$id.'</h3>'.'<form method="POST" action="zapiszEdytowany.php?id='.$id.'">';
+        $wynik =  '<div class="formularz-produkt">';
+        $wynik .= '<h3>Edycja Podstrony o id:'.$id.'</h3>'.'<form method="POST" action="zapiszEdytowany.php?id='.$id.'">';
         $wynik .= '<input class="tytul" type="text" name="page_title" value="'.$page_title.'"><br />';
         $wynik .= '<textarea class="tresc" rows=20 cols=100 name="page_content">'.$page_content.'</textarea><br />';
         $wynik .= 'Podstrona aktywna: <input class="aktywna" type="checkbox" name="page_is_active" value="1"'.($page_is_active == 1 ? 'checked="checked"' : '').'><br />';
-        $wynik .= '<input class="zapisz" type="submit" name="zapisz" value="zapisz">'.'</form>';
+        $wynik .= '<input class="zapisz" type="submit" name="zapisz" value="zapisz" id="logowanie1">'.'</form>';
+        $wynik .= '</div>';
 
         return $wynik;
     }
@@ -102,12 +103,13 @@ function EdytujPodstrone() {
 
 function DodajNowaPodstrone() {
     global $conn;
-
-        $wynik = '<h3>Dodaj podstronę:</h3>'.'<form method="POST" action="dodajStrone.php">';
+        $wynik =  '<div class="formularz-produkt">';
+        $wynik .= '<h3>Dodaj podstronę:</h3>'.'<form method="POST" action="dodajStrone.php">';
         $wynik .= 'Tytuł: <input class="tytul" type="text" name="page_title" value=""><br /> <br />';
         $wynik .= 'Treść: <textarea class="tresc" rows=20 cols=100 name="page_content"></textarea><br /> <br />';
         $wynik .= 'Podstrona aktywna: <input class="aktywna" type="checkbox" name="page_is_active" value="1"><br /> <br />';
-        $wynik .= '<input class="zapisz" type="submit" value="Dodaj">'.'</form>';
+        $wynik .= '<input class="zapisz" type="submit" value="Dodaj" id="logowanie1">'.'</form>';
+        $wynik .= '</div>';
 
         return $wynik;
  }
@@ -129,7 +131,7 @@ function DodajNowaPodstrone() {
             $nazwa = $row['nazwa'];
             $matka = $row['matka_nazwa']; 
 
-            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $nazwa . '</td>'.'<td>' . $matka . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=edytuj&id='.$id.'">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=usun&id='.$id.'" class="a_del">Usuń</a></td>'.'</tr>';
+            $wynik .= '<tr>'.'<td>' . $id . '</td>'.'<td>' . $nazwa . '</td>'.'<td>' . $matka . '</td>'.'<td><a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=edytuj&id='.$id.'" class="btn-edytuj">Edytuj</a> | <a href="'.$_SERVER['PHP_SELF'].'?action_kategoria=usun&id='.$id.'" class="btn-usun">Usuń</a></td>'.'</tr>';
         }
     } else {
         $wynik .= '<tr><td colspan="4">Brak kategorii do wyświetlenia.</td></tr>';
@@ -152,8 +154,8 @@ function DodajNowaPodstrone() {
 
 function DodajKategorie() {
     global $conn;
-
-    $wynik = '<h3>Dodaj kategorię:</h3><form method="POST" action="dodajKategorie.php">';
+    $wynik = '<div class="formularz-produkt">';
+    $wynik .= '<h3>Dodaj kategorię:</h3><form method="POST" action="dodajKategorie.php">';
     $wynik .= 'Nazwa kategorii: <input class="tytul" type="text" name="nazwa" value=""><br /> <br />';
     $wynik .= 'Matka: <select class="matka" name="matka">';
     $wynik .= '<option value="0">Brak</option>';
@@ -165,8 +167,8 @@ function DodajKategorie() {
     }
 
     $wynik .= '</select><br /> <br />';
-    $wynik .= '<input class="zapisz" type="submit" value="Dodaj"></form>';
-
+    $wynik .= '<input class="zapisz" type="submit" value="Dodaj" id="logowanie1"></form>';
+    $wynik .= '</div>';
     return $wynik;
 }
 
@@ -187,10 +189,9 @@ function EdytujKategorie() {
         $row = mysqli_fetch_assoc($result);
         $nazwa = $row['nazwa'];
         $matka = $row['matka'];
-
-        $wynik = '<h3>Edycja kategorii o ID: '.$id.'</h3>'.'<form method="POST" action="zapiszEdytowanaKategorie.php?id='.$id.'">';
+        $wynik = '<div class="formularz-produkt">';
+        $wynik .= '<h3>Edycja kategorii o ID: '.$id.'</h3>'.'<form method="POST" action="zapiszEdytowanaKategorie.php?id='.$id.'">';
         $wynik .= 'Nazwa kategorii: <input class="tytul" type="text" name="nazwa" value="'.$nazwa.'"><br /> <br />';
-
         $wynik .= 'Matka: <select class="matka" name="matka">';
         $wynik .= '<option value="0"'.($matka == 0 ? ' selected' : '').'>Brak</option>';
 
@@ -201,10 +202,10 @@ function EdytujKategorie() {
             $wynik .= '<option value="'.$row['id'].'"'.$selected.'>'.$row['nazwa'].'</option>';
         }
         $wynik .= '</select>';
-        
         $wynik .= '<br /> <br />';
-        $wynik .= '<input class="zapisz" type="submit" name="zapisz" value="Zapisz">';
+        $wynik .= '<input class="zapisz" type="submit" name="zapisz" value="Zapisz" id="logowanie1">';
         $wynik .= '</form>';
+        $wynik .= '</div>';
 
         return $wynik;
     }
@@ -288,9 +289,9 @@ function PobierzKategorieOpcje($selected_id = null) {
 // funkcja pokaz produkt w formie listy
 function ListaProduktow() {
     global $conn;
-
-    $wynik = '<h3>Produkty</h3>';
-    $wynik .= '<table class="tabela_akcji"><tr><th>ID</th><th>Nazwa</th><th>Kategoria</th><th>Cena netto</th><th>Podatek VAT</th><th>Cena brutto</th><th>Status dostępności</th><th>Gabaryt</th><th>Ilość</th><th>Data utworzenia</th><th>Data modyfikacji</th><th>Data wygaśnięcia</th><th>Akcje</th></tr>';
+    $wynik = '<div id="produkty">';
+    $wynik .= '<h3>Produkty</h3>';
+    $wynik .= '<table class="tabela_akcji" id="tabela_akcji_produkty"><tr><th>ID</th><th>Nazwa</th><th>Kategoria</th><th>Cena netto</th><th>Podatek VAT</th><th>Cena brutto</th><th>Status</th><th>Gabaryt</th><th>Ilość</th><th>Data utworzenia</th><th>Data modyfikacji</th><th>Data wygaśnięcia</th><th>Akcje</th></tr>';
 
     $query = "SELECT p.id, p.tytul AS title, c.nazwa AS category, p.cena_netto AS price, p.podatek_vat AS vat, p.status_dostepnosci, 
                      p.gabaryt, p.ilosc, p.data_utworzenia, p.data_modyfikacji, p.data_wygasniecia
@@ -301,29 +302,29 @@ function ListaProduktow() {
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             $cena_brutto = $row['price'] * (1 + $row['vat'] / 100); // Obliczenie ceny brutto
-            $status = $row['status_dostepnosci'] == 1 ? 'Dostępny' : 'Niedostępny';
+            $status = $row['status_dostepnosci'] == 1 ? '✅' : '❌';
             $data_utworzenia = $row['data_utworzenia'] ? $row['data_utworzenia'] : 'Brak';
             $data_modyfikacji = $row['data_modyfikacji'] ? $row['data_modyfikacji'] : 'Brak';
             $data_wygasniecia = $row['data_wygasniecia'] ? $row['data_wygasniecia'] : 'Brak';
             
             $wynik .= '<tr>';
-            $wynik .= '<td>'.$row['id'].'</td>';
-            $wynik .= '<td>'.$row['title'].'</td>';
-            $wynik .= '<td>'.($row['category'] ?? 'Brak').'</td>';
-            $wynik .= '<td>'.$row['price'].'</td>';
-            $wynik .= '<td>'.$row['vat'].'%</td>';
-            $wynik .= '<td>'.number_format($cena_brutto, 2).'</td>';
-            $wynik .= '<td>'.$status.'</td>';
-            $wynik .= '<td>'.$row['gabaryt'].'</td>';
-            $wynik .= '<td>'.$row['ilosc'].'</td>';
-            $wynik .= '<td>'.$data_utworzenia.'</td>';
-            $wynik .= '<td>'.$data_modyfikacji.'</td>';
-            $wynik .= '<td>'.$data_wygasniecia.'</td>';
-            $wynik .= '<td>
-                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=edytuj&id='.$row['id'].'">Edytuj</a> |
-                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=usun&id='.$row['id'].'" class="a_del">Usuń</a>
-                       </td>';
-            $wynik .= '</tr>';
+        $wynik .= '<td>'.$row['id'].'</td>';
+        $wynik .= '<td>'.$row['title'].'</td>';
+        $wynik .= '<td>'.($row['category'] ?? 'Brak').'</td>';
+        $wynik .= '<td>'.$row['price'].'</td>';
+        $wynik .= '<td>'.$row['vat'].'%</td>';
+        $wynik .= '<td>'.number_format($cena_brutto, 2).'</td>';
+        $wynik .= '<td>'.$status.'</td>';
+        $wynik .= '<td>'.$row['gabaryt'].'</td>';
+        $wynik .= '<td>'.$row['ilosc'].'</td>';
+        $wynik .= '<td>'.$data_utworzenia.'</td>';
+        $wynik .= '<td>'.$data_modyfikacji.'</td>';
+        $wynik .= '<td>'.$data_wygasniecia.'</td>';
+        $wynik .= '<td>
+                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=edytuj&id='.$row['id'].'" class="btn-edytuj">Edytuj</a>
+                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=usun&id='.$row['id'].'" class="btn-usun">Usuń</a>
+                   </td>';
+        $wynik .= '</tr>';
         }
     } else {
         $wynik .= '<tr><td colspan="12">Brak produktów do wyświetlenia.</td></tr>';
@@ -331,6 +332,7 @@ function ListaProduktow() {
 
     $wynik .= '</table>';
     $wynik .= '<br><br><a href="'.$_SERVER['PHP_SELF'].'?action_produkt=dodaj" class="shine">Dodaj produkt</a><br /><br />';
+    $wynik .= '</div>';
     return $wynik;
 }
 function DodajProdukt() {
@@ -359,7 +361,7 @@ function DodajProdukt() {
             echo "Błąd podczas dodawania produktu: " . mysqli_error($conn);
         }
     }
-
+    echo '<div class="formularz-produkt">';
     echo '<h3>Dodaj Produkt</h3>';
     echo '<form method="POST" action="'.$_SERVER['PHP_SELF'].'?action_produkt=dodaj">';
     echo 'Nazwa: <input type="text" name="nazwa" required><br>';
@@ -380,8 +382,9 @@ function DodajProdukt() {
             <option value="transport">Transport</option>
           </select><br>';
     echo 'Zdjęcie: <input type="text" name="zdjecie" placeholder="Link do zdjęcia"><br>';
-    echo '<input type="submit" value="Dodaj">';
+    echo '<input type="submit" value="Dodaj" class="logowanie1">';
     echo '</form>';
+    echo '</div>';
 }
 function UsunProdukt() {
     global $conn;
@@ -436,6 +439,7 @@ function EdytujProdukt() {
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
 
+            echo '<div class="formularz-produkt">';
             echo '<h3>Edytuj Produkt</h3>';
             echo '<form method="POST" action="'.$_SERVER['PHP_SELF'].'?action_produkt=edytuj">';
             echo '<input type="hidden" name="id" value="'.$row['id'].'">';
@@ -457,8 +461,9 @@ function EdytujProdukt() {
                     <option value="transport" '.($row['gabaryt'] == 'transport' ? 'selected' : '').'>Transport</option>
                   </select><br>';
             echo 'Zdjęcie: <input type="text" name="zdjecie" value="'.$row['zdjecie'].'" placeholder="Link do zdjęcia"><br>';
-            echo '<input type="submit" value="Zapisz zmiany">';
+            echo '<input type="submit" value="Zapisz zmiany" class="logowanie1">';
             echo '</form>';
+            echo '</div>';
         } else {
             echo "Nie znaleziono produktu o podanym ID.";
         }

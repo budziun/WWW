@@ -1,5 +1,6 @@
-<div id="zegarek"></div>
-        <div id="data"></div>
+<div class="container_index">
+    <div id="zegarek"></div>
+    <div id="data"></div>
 <div class="main">
     <h1>Czym jest komputer?</h1>
     <p>Komputer <b>(od ang. computer);</b> dawniej: mózg elektronowy, elektroniczna maszyna cyfrowa, maszyna matematyczna
@@ -44,7 +45,7 @@
         </table>
         <br>
         <center>
-        <div>
+        <div id="part2">
             <h2>Wybierz kolor tła</h2>
             <form method="POST" name="background">
                 <input type="button" class="colorBtn" id="żółty" value="żółty" onclick="changeBackground('#FFF000')">
@@ -74,21 +75,20 @@
                 <div id="animacjaTestowa2" class="test-block"><h1><b><i>Najedź kursorem a się powiększy</i></b></h1></div>
 
                 <script>
-                    
                     $('#animacjaTestowa2').on({
-                        "mouseover" : function(){
-                            $(this).animate({
+                        "mouseover": function () {
+                            $(this).stop(true, false).animate({
                                 width: 500
                             }, 800);
                         },
-                        "mouseout" : function(){
-                            $(this).animate({
+                        "mouseout": function () {
+                            $(this).stop(true, false).animate({
                                 width: 200
-                            },2000);
+                            }, 2000);
                         }
                     });
-        
                 </script>
+                
                 <br>
                 <div id="animacjaTestowa3" class="test-block"><h1><b><i>Kliknij abym urósł</i></b></h1></div>
 
@@ -106,5 +106,5 @@
                     })
             </script>
         </div>
-        </center>
-        
+    </center>
+</div>

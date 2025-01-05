@@ -23,7 +23,7 @@
     <!-- Linki menu -->
     <div class="navbar-links">
         <a href="index.php?idp=1">Strona główna</a>
-        <a href="index.php?idp=2">Historia Komputerów</a>
+        <a href="index.php?idp=2">Historia</a>
         <a href="index.php?idp=3">Podstawowe elementy</a>
         <a href="index.php?idp=4">Typy komputerów</a>
         <a href="index.php?idp=5">Polskie komputery</a>
@@ -32,7 +32,7 @@
         <a href="index.php?idp=8">Mail</a>
         <a href="index.php?idp=9">Odzyskaj hasło</a>
         <!-- Link do panelu admina -->
-        <a href="admin/admin.php"><b>Admin</b></a>
+        <a href="admin/admin.php"><b>Zaloguj się</b></a>
     </div>
 </div>
 <div class="progress-bar"></div>

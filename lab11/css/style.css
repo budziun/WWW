@@ -25,17 +25,18 @@ h2{
     margin-right: auto;
     width: 800px;   
 }
-p{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-style: normal;
-}
-td{
+
+.table2 td{
     background-color: rgb(100, 202, 236);
     text-align: center;
     color: black;
     border: 0;
     border-radius: 10px;
     height: 55px;
+}
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: normal;
 }
 span{
     text-align: center;
@@ -73,10 +74,6 @@ a{
     font-size: 14px;
     cursor: pointer;
 }
-.table1 td a:hover {
-    color: white;
-    background-color: darkblue;
-}
 ul ol li{
     text-align: center;
     list-style-position: inside;
@@ -84,17 +81,17 @@ ul ol li{
 /* divy od skryptu js data */
 #zegarek{
     font-size: 74px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     position: relative;
     text-align: center;
-    margin-top: 130px;
+    margin-top: 20px;
+    font-family: sans-serif;
 }
 #data{
     font-size: 32px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     position: relative;
     text-align: center;
     margin-bottom: -100px;
+    font-family: sans-serif;
 }
 .table2{
     text-align: center;
@@ -120,7 +117,6 @@ hr{
     justify-content: center;
     align-items: center;
     -webkit-touch-callout: default;
-
 }
 .main{
     margin: auto;
@@ -136,11 +132,7 @@ hr{
     margin-top: 100px;
 
 }
-.tabela_akcji{
-    margin-left: auto;
-    margin-right: auto; 
-}
-.logowanie1 {
+.logowanie1, #logowanie1{
     width: 100%;
     padding: 10px;
     background-color: #034ff4;
@@ -151,7 +143,7 @@ hr{
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.logowanie1:hover {
+.logowanie1:hover, #logowanie1:hover {
     background-color: #020fc2;
     animation: buttonAnimation 0.5s ease-in-out;
 }
@@ -297,36 +289,6 @@ login-box a span {
                 0 0 50px #03e9f4,
                 0 0 100px #03e9f4;
 }
-.a_del{
-    color: red;
-    font-weight: bold;
-}
-.a_del:hover{
-    background: darkred;
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 5px darkred,
-                0 0 10px darkred,
-                0 0 20px darkred,
-                0 0 30px darkred;
-}
-/*
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-    border-bottom: 2px solid #ccc;
-    background: linear-gradient(#006992, #2E1760);
-    position: fixed;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-family: sans-serif;
-}
-*/
 .navbar {
     display: flex;
     align-items: center;
@@ -347,6 +309,7 @@ login-box a span {
     font-size: 18px;
     font-weight: bold;
     color: white;
+    margin-left: 10px;
 }
 .navbar-links {
     display: flex;
@@ -387,4 +350,294 @@ login-box a span {
 .login-box p{
     color: white;
     text-align: center;
+}
+.formularz-produkt {
+    color: white;
+    width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: linear-gradient(#006992, #2E1760);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+}
+
+.formularz-produkt h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.formularz-produkt input[type="text"],
+.formularz-produkt input[type="number"],
+.formularz-produkt input[type="date"],
+.formularz-produkt select,
+.formularz-produkt textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.formularz-produkt textarea {
+    resize: none;
+}
+.tabela_akcji {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+#tabela_akcji_produkty{
+    margin-left: -285px;
+}
+.tabela_akcji th, 
+.tabela_akcji td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.tabela_akcji th {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.tabela_akcji tr {
+    background-color: #f9f9f9;
+}
+
+.tabela_akcji tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-edytuj {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.btn-edytuj:hover {
+    text-decoration: underline;
+}
+.btn-usun {
+    color: #dc3545;
+    text-decoration: none;
+    font-weight: bold;
+}
+.btn-usun:hover {
+    text-decoration: underline;
+}
+.table-components {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+.table-components td {
+    text-align: center;
+    vertical-align: top;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: white;
+}
+.table-components img {
+    max-width: 200px;
+    max-height: 200px;
+    height: auto;
+}
+.table-components a {
+    display: block;
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #333;
+    font-weight: bold;
+}
+.machine-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.machine-item {
+    width: 200px;
+    margin: 20px;
+    text-align: center;
+}
+
+.machine-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.machine-item h3 {
+    font-size: 1em;
+    margin: 10px 0 5px;
+    color: #444;
+}
+
+.machine-item p {
+    font-size: 0.9em;
+    color: #666;
+}
+.container{
+    background-color: white;
+    border: 1px solid black;   
+    border-radius: 10%;
+    box-shadow: #000000 5px 5px 5px;
+}
+.container_components{
+    background-color: white;
+    border: 1px solid black;   
+    border-radius: 5%;
+    height:900px;
+    box-shadow: #000000 5px 5px 5px;
+}
+.container_type{
+    background-color: white;
+    border: 1px solid black;   
+    border-radius: 10%;
+    box-shadow: #000000 5px 5px 5px;
+    height: 1350px;
+}
+.container_pl{
+    background-color: white;
+    border: 1px solid black;   
+    border-radius: 10%;
+    box-shadow: #000000 5px 5px 5px;
+    height: 600px;
+}
+.container_movie{
+    background-color: white;
+    border: 1px solid black;   
+    border-radius: 10%;
+    box-shadow: #000000 5px 5px 5px;
+    height: 1200px;
+}
+.container_index{
+    background-color: white;
+    border: 1px solid black;   
+    border-radius: 5%;
+    box-shadow: #000000 5px 5px 5px;
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2100px;
+    margin-top: 110px;
+    margin-bottom: 50px;
+}
+.container_his{
+    background-color: white;
+    border: 1px solid black;   
+    border-radius: 10%;
+    box-shadow: #000000 5px 5px 5px;
+    width: 1000px;
+    margin-left: -50px;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.95em;
+    color: #666;
+}
+.list-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.list-section ol {
+    padding-left: 30px;
+    margin-bottom: 40px;
+}
+
+.list-section {
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.list-section a {
+    font-size: 1.5em;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.list-section a:hover {
+    text-decoration: underline;
+    color: #03e9f4;
+}
+
+.list-section li {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 5px;
+}
+.scientist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.scientist-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    text-align: center;
+    width: 250px;
+    flex-shrink: 0;
+}
+.scientist-item h3 {
+    font-size: 1.3em;
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+.scientist-item p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.scientist-item h4 {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
 }
