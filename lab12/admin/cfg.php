@@ -21,10 +21,4 @@ if (!$conn) {
 // Dane logowania do celów testowych (należy przenieść do bezpiecznego miejsca)
 $login = 'admin';
 $pass = 'admin';
-
-/**
- * Informacja o powodzeniu połączenia
- * W środowisku produkcyjnym takie komunikaty nie powinny być wyświetlane.
- */
-// echo "Połączono z bazą danych!";
 ?>

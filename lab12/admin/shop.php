@@ -1,7 +1,7 @@
 <?php
 require('cfg.php');
+//utworzenie sesji i koszyka
 session_start();
-
 function Sklep() {
     if (!isset($_SESSION['koszyk'])) {
         $_SESSION['koszyk'] = [];
@@ -11,17 +11,15 @@ function Sklep() {
     
     echo '<div class="main">';
     echo '<div class="container-shop">';
-
     echo '<h1>Witamy w sklepie!</h1>';
-    
+    //pobieranie kategorii z bazy danych i wyświetlanie ich
     $query = "SELECT id, nazwa FROM categories";
     $result = mysqli_query($conn, $query);
     $kategorie = [];
     while ($row = mysqli_fetch_assoc($result)) {
         $kategorie[] = $row;
     }
-
-    // Obsługa wybranych parametrów
+    //obsługa wybranych parametrów
     $kategoriaId = isset($_GET['kategoria']) && is_numeric($_GET['kategoria']) ? (int)$_GET['kategoria'] : 0;
     $sortowanie = isset($_GET['sortowanie']) ? $_GET['sortowanie'] : 'nazwa';
     $idp = isset($_GET['idp']) ? htmlspecialchars($_GET['idp']) : 0; // Upewnij się, że idp jest ustawione
@@ -31,16 +29,19 @@ function Sklep() {
             FROM produkty p
             LEFT JOIN categories c ON p.category_id = c.id";
 
-    // Filtrowanie według kategorii, uwzględniając kategorię nadrzędną
+    //filtrowanie według kategorii, uwzględniając kategorię nadrzędną
     if ($kategoriaId > 0) {
         // Warunek, aby uwzględnić kategorię nadrzędną
         $query .= " WHERE c.id = $kategoriaId OR c.matka = $kategoriaId";
     } else {
         // Jeżeli kategoria nie została wybrana
+        // Domylsnie wyświetl wszystkie produkty
         $query .= " WHERE 1";
     }
 
     // Sortowanie według wybranego kryterium
+    //domyslnie - nazwa alfabetycznie
+    // inne opcje - cena rosnąco, cena malejąco
     switch ($sortowanie) {
         case 'cena_rosnaco':
             $query .= " ORDER BY cena_brutto ASC";
@@ -66,18 +67,16 @@ function Sklep() {
         echo htmlspecialchars($kategoria['nazwa']) . '</option>';
     }
     echo '</select>';
-
     echo '<label for="sortowanie">Sortowanie:</label>';
     echo '<select name="sortowanie" id="sortowanie">';
     echo '<option value="nazwa"' . ($sortowanie === 'nazwa' ? ' selected' : '') . '>Nazwa (domyślne)</option>';
     echo '<option value="cena_rosnaco"' . ($sortowanie === 'cena_rosnaco' ? ' selected' : '') . '>Cena rosnąco</option>';
     echo '<option value="cena_malejaco"' . ($sortowanie === 'cena_malejaco' ? ' selected' : '') . '>Cena malejąco</option>';
     echo '</select>';
-
     echo '<button type="submit" class="btn-dodaj">Filtruj</button>';
     echo '</form>';
 
-
+    // Wyświetlanie produktów
         if ($result && mysqli_num_rows($result) > 0) {
         echo '<div class="produkty-lista">'; 
         
@@ -97,7 +96,7 @@ function Sklep() {
             echo '<p>Cena netto: ' . $cena_netto . '</p>';
             echo '<p>Cena brutto: ' . $cena_brutto . '</p>';
             echo '<form method="get" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '">';
-            echo '<input type="hidden" name="idp" value="10">'; // Dodanie idp=10
+            echo '<input type="hidden" name="idp" value="10">';
             echo '<input type="hidden" name="akcja" value="dodaj_do_koszyka">';
             echo '<input type="hidden" name="id" value="' . $id . '">';
             echo '<label for="ilosc_' . $id . '">Ilość:</label>';
@@ -109,11 +108,13 @@ function Sklep() {
             echo '<button type="submit" class="btn-dodaj">Dodaj do koszyka</button>';
             echo '</form>';
 
-            echo '</div>'; // Koniec boksu produktu
+            echo '</div>';
         }
 
-        echo '</div>'; // Koniec kontenera dla boksów
-    } else {
+        echo '</div>';
+    } 
+    //jeżeli brak produktów w bazie wyswielt komunikat
+    else {
         echo '<p>Brak produktów do wyświetlenia.</p>';
     }
 
@@ -153,7 +154,7 @@ if (isset($_GET['akcja']) && $_GET['akcja'] === 'dodaj_do_koszyka' && isset($_GE
     }
     echo '<div class="koszyk">';
     echo '<h3>Koszyk</h3>';
-
+    //wyswietlanie tabeli dla koszyka
     if (!empty($_SESSION['koszyk'])) {
         echo '<table class="tabela-koszyk">';
         echo '<tr><th>Nazwa</th><th>Ilość</th><th>Cena netto</th><th>Cena brutto</th><th>Akcje</th></tr>';
@@ -188,7 +189,7 @@ if (isset($_GET['akcja']) && $_GET['akcja'] === 'dodaj_do_koszyka' && isset($_GE
                 echo '</tr>';
             }
         }
-
+        //podsumowanie koszyka
         echo '</table>';
         echo '<div class="koszyk-podsumowanie">';
         echo '<p><strong>Razem (netto):</strong> ' . number_format($sumaNetto, 2) . ' PLN</p>';
@@ -196,11 +197,12 @@ if (isset($_GET['akcja']) && $_GET['akcja'] === 'dodaj_do_koszyka' && isset($_GE
         echo '<button class="btn-dodaj" onclick="return confirmOrder();">Zamów</button>';
         echo '</div>';
     } else {
-        echo '<p>Koszyk jest pusty.</p>';
+        echo '<p class="dodane">Koszyk jest pusty.</p>';
     }
     echo '</div>';
     echo '</div>';
     echo '</div>';
+    // działanie po kliknięciu przycisku zamów
     if (isset($_GET['akcja']) && $_GET['akcja'] === 'zloz_zamowienie') {
         unset($_SESSION['koszyk']);
         session_unset();
@@ -211,7 +213,7 @@ if (isset($_GET['akcja']) && $_GET['akcja'] === 'dodaj_do_koszyka' && isset($_GE
 }
 ?>
 <!-- Działanie przycisku zamów
-dla celów naukowych alret ze oplacono i koniec sesji -->
+dla celów naukowych alret ze oplacono i koniec sesji, koszyk pusty -->
 <script>
 function confirmOrder() {
     alert('Przekierowano do płatności \n Zamówienie przyjęte \n Sesja zniszczona \n Koszyk Pusty');

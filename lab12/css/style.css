@@ -1,9 +1,11 @@
+/* Styl dla elementu body - ustawienie tła, marginesów i domyślnej czcionki */
 body{
     background-color: lightblue;
     font-family: sans-serif;
     margin: 0;
     padding: 0; 
 }
+/* Styl dla domyślnych Nagłówków h1 i h2  (nienapisanych klasa) */
 h1{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 32px;
@@ -16,16 +18,17 @@ h2{
     font-style: normal;
     text-align: center;
 }
+/* tabele ze strony glowna.html */
 .table1{
-        margin-left: auto;
-        margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 .table2{
     margin-left: auto;
     margin-right: auto;
     width: 800px;   
+    text-align: center;
 }
-
 .table2 td{
     background-color: rgb(100, 202, 236);
     text-align: center;
@@ -34,12 +37,14 @@ h2{
     border-radius: 10px;
     height: 55px;
 }
+/* elementy ze strony glowna.html */
 p{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-style: normal;
 }
 span{
     text-align: center;
+    color: blue;
 }
 a{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -48,15 +53,7 @@ a{
     text-decoration: none;
     color:black;
 }
-.submit1{
-    background-color:rgb(100, 202, 236);
-    text-align: center;
-    width: 150px;
-    height: 40px;
-    color: black;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: bold;
-}
+/* kolory przycisków do zmieniania koloru tła strony */
 #żółty {background-color: #f9e801;}
 #czerwony {background-color: #f44336; color:white;} 
 #biały {background-color: #e7e7e7; color: black;}
@@ -74,10 +71,6 @@ a{
     font-size: 14px;
     cursor: pointer;
 }
-ul ol li{
-    text-align: center;
-    list-style-position: inside;
-}
 /* divy od skryptu js data */
 #zegarek{
     font-size: 74px;
@@ -93,9 +86,6 @@ ul ol li{
     margin-bottom: -100px;
     font-family: sans-serif;
 }
-.table2{
-    text-align: center;
-}
 /* stopka */
 footer{
     text-align: center;
@@ -105,6 +95,8 @@ hr{
     height: 1px;
     border:0px;
 }
+/**/
+/* klasa dla divów zawierających animacje na stronie glowna.html */
 .test-block{
     width: 220px;
     border: 1.5px solid rgb(100, 181, 208);
@@ -118,6 +110,8 @@ hr{
     align-items: center;
     -webkit-touch-callout: default;
 }
+/* div dla kazdej podstrony zawierajacy glowna tresc strony
+z marginesem z gory ktory pozwala na wyswietlenie menu */
 .main{
     margin: auto;
     width: 50%;
@@ -125,13 +119,9 @@ hr{
     text-align: center;
     margin-top: 100px;
 }
-.main_list{
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    margin-top: 100px;
-
-}
+/* przycisk widoczny przy formularzach 
+Logowanie,Odzyskaj haslo, Mail, Edycja i Dodawanie w CMS admin 
+*/
 .logowanie1, #logowanie1{
     width: 100%;
     padding: 10px;
@@ -158,6 +148,8 @@ hr{
         transform: scale(1);
     }
 }
+/* koniec przycisku logowanie1*/
+/* a href do wylogowania na admin.php*/
 .a_wyloguj{
     color: red;
     font-size: 24px;
@@ -168,6 +160,10 @@ hr{
     transform: scale(1.4);
     font-size: 32px;
 }
+/**/
+/* klasa do formularza logowania
+Logowanie,Odzyskaj haslo, Mail, Edycja i Dodawanie w CMS admin 
+*/
 .login-box{
     font-family: sans-serif;
     width: 400px;
@@ -190,7 +186,6 @@ hr{
 .login-box .user-box {
     position: relative;
 }
-  
 .login-box .user-box input {
     width: 100%;
     padding: 10px 0;
@@ -231,8 +226,7 @@ hr{
     transition: .5s;
     margin-top: 40px;
     letter-spacing: 4px
-}
-  
+} 
 .login-box a:hover {
     background: #03e9f4;
     color: #fff;
@@ -242,10 +236,10 @@ hr{
                 0 0 50px #03e9f4,
                 0 0 100px #03e9f4;
 }
-login-box a span {
-    position: absolute;
-    display: block;
-  }
+.login-box p{
+    color: white;
+    text-align: center;
+}
 .big_one {
     width: 100%;
     padding: 10px 0;
@@ -267,10 +261,13 @@ login-box a span {
     color: #03e9f4;
     font-size: 12px;
 }
+/* koniec css dla forma */
+/* error jak sie nie uda zalogowac*/
 .error{
     color: red;
     font-size: 32px;
 }
+/* Przycisk do dodawania w CMS z animacja, że się świeci */
 .shine{
     color: black;
     font-size: 16px;
@@ -289,6 +286,8 @@ login-box a span {
                 0 0 50px #03e9f4,
                 0 0 100px #03e9f4;
 }
+/**/
+/* menu nawigacyjne */
 .navbar {
     display: flex;
     align-items: center;
@@ -331,6 +330,8 @@ login-box a span {
                 0 0 50px #03e9f4,
                 0 0 100px #03e9f4;
 }
+/**/
+/* pasek.js skrypt, formatowaine paska postepu przewijania strony */
 .progress-bar {
     position: fixed;
     top: 100px; 
@@ -341,16 +342,14 @@ login-box a span {
     z-index: 1000;
     transition: width 0.1s ease-out;
 }
+/* formatowanie dla podstron gdzie nie ma menu nawigacyjnego */
 #admin{
     margin-top: -300px;
 }
 #logged_admin{
     margin-top: -200px;
 }
-.login-box p{
-    color: white;
-    text-align: center;
-}
+/* Formularz w admin.php do dodawania/edycji produktów,kategorii,stron */
 .formularz-produkt {
     color: white;
     width: 400px;
@@ -382,6 +381,11 @@ login-box a span {
 .formularz-produkt textarea {
     resize: none;
 }
+/**/
+/* tabele do wyswietlania w admin.php 
+Podstron, kategorii, produktów
+dla produktow dodatkowy id zeby poprawic formatowanie
+*/
 .tabela_akcji {
     width: 100%;
     border-collapse: collapse;
@@ -411,7 +415,8 @@ login-box a span {
 .tabela_akcji tr:hover {
     background-color: #f1f1f1;
 }
-
+/**/
+/* Przycisk edycji */
 .btn-edytuj {
     color: #007bff;
     text-decoration: none;
@@ -420,6 +425,7 @@ login-box a span {
 .btn-edytuj:hover {
     text-decoration: underline;
 }
+/* Przycisk usuwania */
 .btn-usun {
     color: #dc3545;
     text-decoration: none;
@@ -428,6 +434,7 @@ login-box a span {
 .btn-usun:hover {
     text-decoration: underline;
 }
+/* tabela basic.html */
 .table-components {
     width: 100%;
     border-collapse: collapse;
@@ -452,6 +459,7 @@ login-box a span {
     color: #333;
     font-weight: bold;
 }
+/* lista w before.html*/
 .machine-list {
     display: flex;
     flex-wrap: wrap;
@@ -481,6 +489,7 @@ login-box a span {
     font-size: 0.9em;
     color: #666;
 }
+/* kontenery dla wszystkich podstron html i shop.php */
 .container{
     background-color: white;
     border: 1px solid black;   
@@ -535,18 +544,21 @@ login-box a span {
     width: 1000px;
     margin-left: -50px;
 }
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
+
 .container-shop{
     background-color: white;
     border: 1px solid black;   
     border-radius: 10%;
     box-shadow: #000000 5px 5px 5px;
 }
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+/**/
+/* types.html divy od wyswietlania*/
 .card {
     width: 300px;
     padding: 20px;
@@ -574,6 +586,7 @@ login-box a span {
     font-size: 0.95em;
     color: #666;
 }
+/* polish.html style dla list*/
 .list-section ul {
     list-style-type: none;
     padding-left: 0;
@@ -612,13 +625,13 @@ login-box a span {
     color: #555;
     margin-bottom: 5px;
 }
+/* history.html */
 .scientist {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin-bottom: 30px;
 }
-
 .scientist-item {
     background-color: #f9f9f9;
     padding: 15px;
@@ -635,25 +648,22 @@ login-box a span {
     color: #007bff;
     margin-bottom: 5px;
 }
-
 .scientist-item p {
     font-size: 1.1em;
     color: #555;
 }
-
 .scientist-item h4 {
     font-size: 1.1em;
     font-weight: bold;
     color: #333;
 }
-/* shop */
+/* shop.php */
 .produkty-lista {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
-
 .produkt-boks {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -674,7 +684,7 @@ login-box a span {
     margin-bottom: 10px;
     border-radius: 5px;
 }
-
+/* przycisk dodawnaia do koszyka i zamow */
 .btn-dodaj {
     background-color: #28a745;
     color: white;
@@ -689,14 +699,13 @@ login-box a span {
     animation: buttonAnimation 0.5s ease-in-out;
     background-color: #218838;
 }
+/* div koszyk srodkujacy */
 .koszyk{
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
-.menu-lewe{
-    background-color: red;
-}
+/* tabela od koszyka */
 .tabela-koszyk{
     margin-left: auto;
     margin-right: auto;
@@ -720,26 +729,30 @@ login-box a span {
 .tabela-koszyk tr:hover {
     background-color: #f1f1f1;
 }
+/* */
+/* dodane to komunikat <p> mowiacy o stanie 
+np. dodano do koszyka, przekroczono max ilosc,koszyk jest pusty
+*/
 .dodane{
     font-family: sans-serif;
     font-weight: bold;
 }
+/* usuwanie z koszyka */
 .btn-usun {
     color: red;
     text-decoration: none;
     font-weight: bold;
 }
-.container-shop h1{
-    font-family: sans-serif;
-}
+/* div ktory zawiera podsumowanie koszyka */
 .koszyk-podsumowanie{
     font-family: sans-serif;
     font-weight: bold;
     margin-bottom: 20px;
 }
+/* formularz od sortowania i filtrowania produktów według kategorii*/
 .sort {
     display: flex;
-    justify-content: space-between; /* Align items to opposite ends */
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
@@ -752,18 +765,15 @@ login-box a span {
     margin-left: auto;
     margin-right: auto;
 }
-
 .sort .form-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
-
 .sort label {
     font-weight: bold;
     color: #333;
 }
-
 .sort select {
     padding: 0.5rem;
     border: 1px solid #ccc;

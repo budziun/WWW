@@ -9,10 +9,24 @@
 <body>
 <div class='main'>
 <?php
+//start sesji, sprawdzanie czy admin jest zalogowany
 ob_start();
 session_start();
 require('cfg.php');
+if (isset($_POST['login_email']) && isset($_POST['login_pass'])) {
+    $formLogin = $_POST['login_email'];
+    $formPass = $_POST['login_pass'];
+
+    if ($formLogin === $login && $formPass === $pass) {
+        $_SESSION['admin_logged_in'] = true;
+        header("Refresh:0");
+    } else {
+        echo '<a class="error">Błędne Dane! <br>Wpisz hasło lub login jeszcze raz</a>';
+        echo '<br><br>';
+    }
+}
 echo "<div class='main'>";
+//funkcja generujaca formularz logowania
 function FormularzLogowania() {
     $wynik = '
     <div id="admin">
@@ -37,7 +51,7 @@ function FormularzLogowania() {
     ';
     return $wynik;
 }
-
+//wyswietlanie podstron z bazy danych
 function ListaPodstron() {
     global $conn;
 
@@ -59,7 +73,7 @@ function ListaPodstron() {
     $wynik .= '</table>';
     $wynik .= '<br><br><a href="'.$_SERVER['PHP_SELF'].'?action=dodaj" class="shine">Dodaj podstronę</a> <br /> <br />';
     echo $wynik;
-
+    //wybranie akcji powoduje wywołanie odpowiedniej funkcji
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'edytuj' && isset($_GET['id'])) {
             echo EdytujPodstrone();
@@ -70,7 +84,7 @@ function ListaPodstron() {
         }
 }
 }
-
+//funkcja do edycjh podstrony i formularz do niej
 function EdytujPodstrone() {
     global $conn;
 
@@ -100,7 +114,7 @@ function EdytujPodstrone() {
         return $wynik;
     }
 }
-
+//formularz dodawania nowej podstrony
 function DodajNowaPodstrone() {
     global $conn;
         $wynik =  '<div class="formularz-produkt">';
@@ -113,7 +127,7 @@ function DodajNowaPodstrone() {
 
         return $wynik;
  }
-
+ //wyswietlanie kategorii z bazy danych
  function ListaKategorii() {
     global $conn;
 
@@ -151,7 +165,7 @@ function DodajNowaPodstrone() {
         }
     }
 }
-
+//formularz dodawania nowej kategorii
 function DodajKategorie() {
     global $conn;
     $wynik = '<div class="formularz-produkt">';
@@ -171,7 +185,7 @@ function DodajKategorie() {
     $wynik .= '</div>';
     return $wynik;
 }
-
+//funkcja do edytowania kategorii i formularz do niej
 function EdytujKategorie() {
     global $conn;
 
@@ -210,6 +224,7 @@ function EdytujKategorie() {
         return $wynik;
     }
 }
+//funkcja usuwania kategorii
 function UsunKategorie() {
     global $conn;
 
@@ -231,21 +246,21 @@ function UsunKategorie() {
         exit;
     }
 }
-
+//funkcja usuwania podstrony
 function UsunPodstrone() {
     global $conn;
-
+    //sprawdzenie czy podano id i czy jest podstrona z takim id
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
     } else {
         echo "Brak podstrony z tym ID";
         exit;
     }
-
-
+    //usuniecie podstrony z bazy danych
     $query = "DELETE FROM page_list WHERE id = $id LIMIT 1";
     $result = mysqli_query($conn, $query);
-
+    //sprawdzenie czy usunieto podstrone
+    ///jesli tak to przekierowanie na admin.php (odswieza strone)
     if ($result) {
         echo "Usunięto podstronę";
         header("Location: admin.php");
@@ -254,36 +269,21 @@ function UsunPodstrone() {
         exit;
     }
 }
-
-
-
-if (isset($_POST['login_email']) && isset($_POST['login_pass'])) {
-    $formLogin = $_POST['login_email'];
-    $formPass = $_POST['login_pass'];
-
-    if ($formLogin === $login && $formPass === $pass) {
-        $_SESSION['admin_logged_in'] = true;
-        header("Refresh:0");
-    } else {
-        echo '<a class="error">Błędne Dane! <br>Wpisz hasło lub login jeszcze raz</a>';
-        echo '<br><br>';
-    }
-}
-
+//funkcja do pobierania opcji katrgorii
 function PobierzKategorieOpcje($selected_id = null) {
     global $conn;
 
-    $query = "SELECT id, nazwa FROM categories";
-    $result = mysqli_query($conn, $query);
+    $stmt = $conn->prepare("SELECT id, nazwa FROM categories");
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $opcje = '';
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $selected = ($selected_id == $row['id']) ? 'selected' : '';
-            $opcje .= '<option value="'.$row['id'].'" '.$selected.'>'.$row['nazwa'].'</option>';
-        }
+    while ($row = $result->fetch_assoc()) {
+        $selected = ($selected_id == $row['id']) ? 'selected' : '';
+        $opcje .= '<option value="'.$row['id'].'" '.$selected.'>'.$row['nazwa'].'</option>';
     }
 
+    $stmt->close();
     return $opcje;
 }
 // funkcja pokaz produkt w formie listy
@@ -308,33 +308,33 @@ function ListaProduktow() {
             $data_wygasniecia = $row['data_wygasniecia'] ? $row['data_wygasniecia'] : 'Brak';
             
             $wynik .= '<tr>';
-        $wynik .= '<td>'.$row['id'].'</td>';
-        $wynik .= '<td>'.$row['title'].'</td>';
-        $wynik .= '<td>'.($row['category'] ?? 'Brak').'</td>';
-        $wynik .= '<td>'.$row['price'].'</td>';
-        $wynik .= '<td>'.$row['vat'].'%</td>';
-        $wynik .= '<td>'.number_format($cena_brutto, 2).'</td>';
-        $wynik .= '<td>'.$status.'</td>';
-        $wynik .= '<td>'.$row['gabaryt'].'</td>';
-        $wynik .= '<td>'.$row['ilosc'].'</td>';
-        $wynik .= '<td>'.$data_utworzenia.'</td>';
-        $wynik .= '<td>'.$data_modyfikacji.'</td>';
-        $wynik .= '<td>'.$data_wygasniecia.'</td>';
-        $wynik .= '<td>
-                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=edytuj&id='.$row['id'].'" class="btn-edytuj">Edytuj</a>
-                        <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=usun&id='.$row['id'].'" class="btn-usun">Usuń</a>
-                   </td>';
-        $wynik .= '</tr>';
+            $wynik .= '<td>'.$row['id'].'</td>';
+            $wynik .= '<td>'.$row['title'].'</td>';
+            $wynik .= '<td>'.($row['category'] ?? 'Brak').'</td>';
+            $wynik .= '<td>'.$row['price'].'</td>';
+            $wynik .= '<td>'.$row['vat'].'%</td>';
+            $wynik .= '<td>'.number_format($cena_brutto, 2).'</td>';
+            $wynik .= '<td>'.$status.'</td>';
+            $wynik .= '<td>'.$row['gabaryt'].'</td>';
+            $wynik .= '<td>'.$row['ilosc'].'</td>';
+            $wynik .= '<td>'.$data_utworzenia.'</td>';
+            $wynik .= '<td>'.$data_modyfikacji.'</td>';
+            $wynik .= '<td>'.$data_wygasniecia.'</td>';
+            $wynik .= '<td>
+            <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=edytuj&id='.$row['id'].'" class="btn-edytuj">Edytuj</a>
+            <a href="'.$_SERVER['PHP_SELF'].'?action_produkt=usun&id='.$row['id'].'" class="btn-usun">Usuń</a>
+            </td>';
+            $wynik .= '</tr>';
+            }
+        } else {
+            $wynik .= '<tr><td colspan="12">Brak produktów do wyświetlenia.</td></tr>';
         }
-    } else {
-        $wynik .= '<tr><td colspan="12">Brak produktów do wyświetlenia.</td></tr>';
-    }
-
-    $wynik .= '</table>';
-    $wynik .= '<br><br><a href="'.$_SERVER['PHP_SELF'].'?action_produkt=dodaj" class="shine">Dodaj produkt</a><br /><br />';
-    $wynik .= '</div>';
-    return $wynik;
+        $wynik .= '</table>';
+        $wynik .= '<br><br><a href="'.$_SERVER['PHP_SELF'].'?action_produkt=dodaj" class="shine">Dodaj produkt</a><br /><br />';
+        $wynik .= '</div>';
+        return $wynik;
 }
+//funkcja dodawania nowego produktu
 function DodajProdukt() {
     global $conn;
 
@@ -353,16 +353,18 @@ function DodajProdukt() {
         $data_modyfikacji = date('Y-m-d');
 
         //pobieranie max id zeby byly id po sobie
+        /// i zmiana auto increment na max id + 1
+        /// po zmiane A_I dodanie produktu do bazy dancyh 
         $query_max_id = "SELECT MAX(id) AS max_id FROM produkty";
         $result = mysqli_query($conn, $query_max_id);
         $row = mysqli_fetch_assoc($result);
         $max_id = $row['max_id'];
         $query_auto_increment = "ALTER TABLE produkty AUTO_INCREMENT = " . ($max_id + 1);
         mysqli_query($conn, $query_auto_increment);
-
         $query = "INSERT INTO produkty (tytul, category_id, cena_netto, podatek_vat, opis, data_utworzenia, data_modyfikacji, data_wygasniecia, ilosc, status_dostepnosci, gabaryt, zdjecie) 
                   VALUES ('$nazwa', $kategoria, $cena_netto, $podatek_vat, '$opis', '$data_utworzenia', '$data_modyfikacji', '$data_wygasniecia', $ilosc, $status_dostepnosci, '$gabaryt', '$zdjecie')";
-        
+        //sprawdzenie czy dodano produkt
+        //// jesli tak odswiezenie strony
         if (mysqli_query($conn, $query)) {
             header("Location: admin.php");
             exit;
@@ -370,6 +372,7 @@ function DodajProdukt() {
             echo "Błąd podczas dodawania produktu: " . mysqli_error($conn);
         }
     }
+    //formularz dodawania produktu
     echo '<div class="formularz-produkt">';
     echo '<h3>Dodaj Produkt</h3>';
     echo '<form method="POST" action="'.$_SERVER['PHP_SELF'].'?action_produkt=dodaj">';
@@ -395,14 +398,15 @@ function DodajProdukt() {
     echo '</form>';
     echo '</div>';
 }
-
+//funkcja usuwania produktu
 function UsunProdukt() {
     global $conn;
-
+    //sprawdzenie czy jest id takiego produktu i usuniecie go z bazy danych
+    //else jesli nie podano id do usuniecia
     if (isset($_GET['id'])) {
         $id = (int)$_GET['id'];
         $query = "DELETE FROM produkty WHERE id = $id";
-
+        //sprawdzenie czy usunieto produkt
         if (mysqli_query($conn, $query)) {
             header("Location: admin.php");
             exit;
@@ -413,7 +417,7 @@ function UsunProdukt() {
         echo "Nie podano ID produktu do usunięcia.";
     }
 }
-
+//funkcja edycji produktu
 function EdytujProdukt() {
     global $conn;
 
@@ -481,7 +485,8 @@ function EdytujProdukt() {
         echo "Nie podano ID produktu do edycji.";
     }
 }
-
+//jezeli zalogowano wyswietlane sa listy podstron, kategorii i produktow
+// w przeciwnym wypadku wyswietlany jest formularz logowania
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     echo '<div id="logged_admin">';
     echo '<h1>Witamy w panelu administratora</h1>';

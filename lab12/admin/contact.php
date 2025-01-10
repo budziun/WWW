@@ -1,13 +1,14 @@
 <?php
+//biblioteka do wysylania maili
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
+//folder vendor jest spakowany w zip w pliku z repozytorium
 require 'vendor/autoload.php';
-
+//funkcja do obslugi wysylki maili
 if (!function_exists('smtp_send')) {
     function smtp_send($socket, $command) {
         fwrite($socket, $command . "\r\n");
-        return fgets($socket, 512);  // Odczytuje odpowiedź od serwera
+        return fgets($socket, 512); 
     }
 }
 /**

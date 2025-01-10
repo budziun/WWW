@@ -2,6 +2,7 @@
 require('cfg.php');
 
 if (isset($_POST['nazwa'])) {
+    //pobranie danych z formularza
     $nazwa = $_POST['nazwa'];
     $matka = $_POST['matka'];
 
@@ -12,10 +13,10 @@ if (isset($_POST['nazwa'])) {
     $max_id = $row_max_id['max_id'];
     $query_auto_increment = "ALTER TABLE categories AUTO_INCREMENT = " . ($max_id + 1);
     mysqli_query($conn, $query_auto_increment);
-    
+    // zapytanie sql po zmianie AutoIncrement
     $query = "INSERT INTO categories (nazwa, matka) VALUES ('$nazwa', '$matka')";
     $result = mysqli_query($conn, $query);
-
+    //Sprawdzenie czy dodano podstronę
     if ($result) {
         header("Location: admin.php");
     } else {
