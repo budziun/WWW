@@ -1,4 +1,4 @@
-<!-- Wersja 1.8 -->
+<!-- Wersja 1.12 -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
